@@ -33,58 +33,270 @@ body {
 
 /* Header */
 header {
-    background-color: var(--bg-white);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(107, 70, 193, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--primary-color), transparent) 1;
+    transition: all 0.3s ease;
+}
+
+header:hover {
+    box-shadow: 0 6px 30px rgba(107, 70, 193, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 20px;
+    padding: 1.2rem 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.logo-wrapper:hover {
+    transform: translateY(-2px);
+}
+
+.logo-image {
+    height: 50px;
+    width: auto;
+    max-width: 60px;
+    object-fit: contain;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: brightness(1) contrast(1) drop-shadow(0 2px 6px rgba(107, 70, 193, 0.15));
+    border-radius: 8px;
+    padding: 4px;
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.05), rgba(139, 92, 246, 0.05));
+    backdrop-filter: blur(5px);
+}
+
+.logo-wrapper:hover .logo-image {
+    transform: scale(1.08);
+    filter: brightness(1.1) contrast(1.05) drop-shadow(0 4px 12px rgba(107, 70, 193, 0.25));
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(139, 92, 246, 0.1));
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    margin: 0;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.logo-wrapper:hover .logo::after {
+    width: 100%;
 }
 
 nav {
     display: flex;
-    gap: 2rem;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
     color: var(--text-dark);
-    font-weight: 500;
-    transition: color 0.3s;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    transition: left 0.3s ease;
+    z-index: -1;
+    border-radius: 10px;
 }
 
 nav a:hover {
-    color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
+}
+
+nav a:hover::before {
+    left: 0;
+}
+
+nav a:active {
+    transform: translateY(0);
 }
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    position: relative;
     color: white;
-    padding: 4rem 0;
+    padding: 6rem 0;
     text-align: center;
+    overflow: hidden;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    z-index: 1;
+    opacity: 0.9;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateY(-50%) translateY(-20px);
+    }
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    transition: all 0.5s ease;
+}
+
+.hero:hover .hero-image {
+    transform: scale(1.05);
+    filter: drop-shadow(0 15px 40px rgba(107, 70, 193, 0.4));
+}
+
+.shader-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        #667eea 0%, 
+        #764ba2 25%,
+        #f093fb 50%,
+        #4facfe 75%,
+        #00f2fe 100%
+    );
+    z-index: 0;
+}
+
+.shader-stripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 20px,
+        transparent 20px,
+        transparent 40px,
+        rgba(255, 255, 255, 0.03) 40px,
+        rgba(255, 255, 255, 0.03) 60px
+    );
+    opacity: 1;
+    animation: stripeMove 25s linear infinite;
+}
+
+@keyframes stripeMove {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(100px) translateY(100px);
+    }
+}
+
+.shader-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 182, 193, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    animation: glowPulse 8s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes glowPulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-shadow: none;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .hero p {
     font-size: 1.2rem;
     opacity: 0.95;
+    font-weight: 300;
 }
 
 /* Sections */
@@ -101,6 +313,33 @@ nav a:hover {
     margin-bottom: 1rem;
     color: var(--primary-color);
     text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+#team .section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+#team .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 2px;
 }
 
 .section-intro {
@@ -207,51 +446,239 @@ nav a:hover {
 }
 
 /* Team Section */
+#team {
+    position: relative;
+    overflow: hidden;
+}
+
+#team::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(107, 70, 193, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#team .container {
+    position: relative;
+    z-index: 1;
+}
+
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.team-card {
+    animation: fadeInUp 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.team-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.team-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.team-card:nth-child(3) {
+    animation-delay: 0.3s;
 }
 
 .team-card {
     background: var(--bg-white);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2rem;
+    border: 3px solid transparent;
+    border-radius: 24px;
+    padding: 0;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light), var(--secondary-color));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
 }
 
 .team-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(107, 70, 193, 0.25), 0 10px 20px rgba(107, 70, 193, 0.15);
+    border-color: var(--primary-color);
 }
 
-.team-avatar {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+.team-card:hover::before {
+    opacity: 1;
+}
+
+.team-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 50%, var(--secondary-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(107, 70, 193, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+.team-card:hover .team-image-wrapper::after {
+    opacity: 1;
+}
+
+.team-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: brightness(1) contrast(1);
+    position: relative;
+    z-index: 0;
+}
+
+.team-card:hover .team-image {
+    transform: scale(1.15) rotate(1deg);
+    filter: brightness(1.1) contrast(1.1);
+}
+
+.team-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(107, 70, 193, 0.1) 50%,
+        rgba(107, 70, 193, 0.3) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.team-card:hover .team-image-overlay {
+    opacity: 1;
+}
+
+.team-content {
+    padding: 2.5rem;
+    text-align: left;
+    position: relative;
+    background: var(--bg-white);
 }
 
 .team-name {
     color: var(--primary-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.3s ease;
+    letter-spacing: -0.5px;
+}
+
+.team-card:hover .team-name {
+    transform: scale(1.05);
 }
 
 .team-role {
     color: var(--text-light);
-    margin-bottom: 1rem;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.05), rgba(139, 92, 246, 0.05));
+    border-radius: 12px;
+    display: inline-block;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.team-card:hover .team-role {
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.1), rgba(139, 92, 246, 0.1));
+    transform: translateY(-2px);
 }
 
 .team-skills {
     text-align: left;
-    margin: 1.5rem 0;
+    margin: 2rem 0;
+    position: relative;
 }
 
 .team-skills h4 {
     color: var(--text-dark);
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.team-skills h4::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
 }
 
 .team-skills ul {
@@ -260,22 +687,95 @@ nav a:hover {
 }
 
 .team-skills li {
-    padding: 0.3rem 0;
+    padding: 0.7rem 0;
     color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 1.8rem;
+    transition: all 0.3s ease;
+    border-left: 2px solid transparent;
+    padding-left: 1.5rem;
+    margin-left: 0.3rem;
+}
+
+.team-skills li:hover {
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    transform: translateX(5px);
+    padding-left: 1.8rem;
+}
+
+.team-skills li:before {
+    content: "▸";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.team-skills li:hover:before {
+    transform: translateX(3px);
 }
 
 .team-links {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
 }
 
-.team-links a {
+.team-link {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.05), rgba(139, 92, 246, 0.05));
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.team-links a:hover {
-    color: var(--primary-dark);
+.team-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.team-link:hover {
+    color: white;
+    background: transparent;
+    border-color: var(--primary-color);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(107, 70, 193, 0.3);
+}
+
+.team-link:hover::before {
+    left: 0;
+}
+
+.team-link-separator {
+    color: var(--text-light);
+    margin: 0 0.3rem;
+    font-weight: 300;
 }
 
 .important-note {
@@ -638,24 +1138,97 @@ footer p {
     header .container {
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem 20px;
+    }
+
+    .logo-wrapper {
+        gap: 0.6rem;
+    }
+
+    .logo-image {
+        height: 40px;
+        max-width: 50px;
+        padding: 3px;
+    }
+
+    .logo {
+        font-size: 1.6rem;
     }
 
     nav {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem;
+        gap: 0.3rem;
+        width: 100%;
+    }
+
+    nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .hero {
+        padding: 4rem 0;
+        min-height: 500px;
+    }
+
+    .hero-image-wrapper {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 100%;
+        height: 300px;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding: 0 1rem;
     }
 
     .hero h2 {
         font-size: 2rem;
     }
 
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .shader-glow {
+        width: 200%;
+        height: 200%;
+        filter: blur(60px);
+    }
+
     .section-title {
         font-size: 1.8rem;
     }
 
-    .problem-grid, .solution-grid, .team-grid, .strengths-grid, .steps-grid, .ai-grid {
+    .problem-grid, .solution-grid,     .team-grid, .strengths-grid, .steps-grid, .ai-grid {
         grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .team-image-wrapper {
+        height: 320px;
+    }
+
+    .team-content {
+        padding: 1.8rem;
+    }
+
+    .team-name {
+        font-size: 1.4rem;
+    }
+
+    #team .section-title {
+        font-size: 2rem;
     }
 
     .timeline-item {
