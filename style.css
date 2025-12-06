@@ -1152,11 +1152,13 @@ nav a:active {
     position: relative;
     width: 100%;
     max-width: 900px;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     background: var(--bg-white);
     transition: all 0.3s ease;
-    overflow: hidden;
 }
 
 .video-container:hover {
@@ -1164,12 +1166,14 @@ nav a:active {
     transform: translateY(-5px);
 }
 
-.video-player {
+.video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
     border-radius: 20px;
-    background: #000;
+    border: none;
 }
 
 /* Website Link Section */
