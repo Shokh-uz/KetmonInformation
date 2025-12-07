@@ -12,7 +12,13 @@
             <img src="images/Logo.png" alt="KETMON Logo" class="logo-image" />
             <h1 class="logo">KETMON</h1>
         </div>
-        <nav>
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-overlay"></div>
+        <nav class="nav-menu">
             <a href="#video-description">Demo Video Description</a>
             <a href="#video">Demo Video</a>
             <a href="#website-link">Our Website</a>
@@ -90,7 +96,7 @@
             <p class="section-intro">Explore KETMON platform and discover amazing travel opportunities in Central Asia.</p>
             
             <div class="website-link-wrapper">
-                <a href="www.ketmontravel.uz" target="_blank" class="website-link-button">
+                <a href="https://www.ketmontravel.uz" target="_blank" class="website-link-button">
                     <span class="website-link-text">Visit KETMON Website</span>
                     <span class="website-link-arrow">→</span>
                 </a>
@@ -122,6 +128,35 @@
     </section>
       <!-- Footer -->
       <footer>
+      
+      <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navOverlay = document.querySelector('.nav-overlay');
+        
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          navMenu.classList.toggle('active');
+          navOverlay.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on overlay
+        navOverlay.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          navOverlay.classList.remove('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+          });
+        });
+      </script>
         <div class="container">
             <p>&copy; 2025 KETMON. Revolutionizing Tourism in Central Asia.</p>
         </div>
